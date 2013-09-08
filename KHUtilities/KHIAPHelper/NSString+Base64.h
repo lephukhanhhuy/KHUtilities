@@ -12,4 +12,6 @@
 
 + (NSString *) base64StringFromData:(NSData *)data length:(int)length;
 
+- (id) toJSON;
+
 @end

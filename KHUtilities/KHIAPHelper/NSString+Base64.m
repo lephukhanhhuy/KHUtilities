@@ -73,5 +73,20 @@ static char base64EncodingTable[64] = {
     return result;
 }
 
-
+- (id) toJSON
+{
+    NSError* e = nil;
+    id jsonObject = [NSJSONSerialization JSONObjectWithData: [self dataUsingEncoding:NSUTF8StringEncoding]
+                                                    options: NSJSONReadingMutableContainers
+                                                      error: &e];
+    
+    if(e==nil) {
+        return jsonObject;
+    }
+    else {
+        NSLog(@"%@",[e localizedDescription]);
+        return nil;
+    }
+    
+}
 @end

@@ -15,6 +15,8 @@
 #import "IAPHelper.h"
 #import "NSString+Base64.h"
 
+#define kProductionStatusFail 21007
+
 #if ! __has_feature(objc_arc)
 #error You need to either convert your project to ARC or add the -fobjc-arc compiler flag to IAPHelper.m.
 #endif
@@ -26,13 +28,22 @@
 @property (nonatomic,copy) IAPRestoreProductsCompleteResponseBlock restoreCompletedBlock;
 @property (nonatomic,copy) IAPCheckReceiptCompleteResponseBlock checkReceiptCompleteBlock;
 
+@property (nonatomic) BOOL production;
+
 @property (nonatomic,strong) NSMutableData* receiptRequestData;
+
+// Use for recall receipt method
+@property (nonatomic,strong) NSString* secretKey;
+@property (nonatomic,strong) NSData* receiptData;
 @end
 
 @implementation IAPHelper
 
 - (id)initWithProductIdentifiers:(NSSet *)productIdentifiers {
     if ((self = [super init])) {
+        
+        // Default is production. This be changed to sanbox when get status = kProductionStatusFail
+        self.production = YES;
         
         // Store product identifiers
         _productIdentifiers = productIdentifiers;
@@ -201,6 +212,8 @@
 }
 - (void)checkReceipt:(NSData*)receiptData AndSharedSecret:(NSString*)secretKey onCompletion:(IAPCheckReceiptCompleteResponseBlock)completion
 {
+    self.receiptData = receiptData;
+    self.secretKey = secretKey;
     
     self.checkReceiptCompleteBlock = completion;
     
@@ -277,9 +290,20 @@
 
 -(void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSString *response = [[NSString alloc] initWithData:self.receiptRequestData encoding:NSUTF8StringEncoding];
-    
-    if(_checkReceiptCompleteBlock) {
-        _checkReceiptCompleteBlock(response,nil);
+    NSDictionary* rec = [response toJSON];
+    if([rec[@"status"] integerValue] == kProductionStatusFail)
+    {
+        NSLog(@"Fail in Production to Sanbox and checkReceipt again");
+        self.production = NO;
+        [self checkReceipt:self.receiptData AndSharedSecret:self.secretKey onCompletion:_checkReceiptCompleteBlock];
+    }
+    else
+    {
+        self.receiptData = nil;
+        self.secretKey = nil;
+        if(_checkReceiptCompleteBlock) {
+            _checkReceiptCompleteBlock(response,nil);
+        }
     }
 }
 - (void)dealloc

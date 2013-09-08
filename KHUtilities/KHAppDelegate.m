@@ -10,10 +10,20 @@
 
 #import "KHViewController.h"
 
+#import "KHIAPShare.h"
+
 @implementation KHAppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
+    // Test IAP
+    if(![KHIAPShare sharedHelper].iap) {
+        NSSet* dataSet = [[NSSet alloc] initWithObjects:@"com.indygomedia.dattenchobe.full", nil];
+        [KHIAPShare sharedHelper].iap = [[IAPHelper alloc] initWithProductIdentifiers:dataSet];
+    }
+    
+    
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     // Override point for customization after application launch.
     self.viewController = [[KHViewController alloc] initWithNibName:@"KHViewController" bundle:nil];

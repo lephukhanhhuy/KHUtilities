@@ -16,7 +16,6 @@
 #import <Foundation/Foundation.h>
 #import "StoreKit/StoreKit.h"
 
-
 typedef void (^IAPProductsResponseBlock)(SKProductsRequest* request , SKProductsResponse* response);
 
 typedef void (^IAPBuyProductCompleteResponseBlock)(SKPaymentTransaction* transaction);
@@ -31,7 +30,6 @@ typedef void (^IAPRestoreProductsCompleteResponseBlock) (SKPaymentQueue* payment
 @property (nonatomic,strong) NSArray * products;
 @property (nonatomic,strong) NSMutableSet *purchasedProducts;
 @property (nonatomic,strong) SKProductsRequest *request;
-@property (nonatomic) BOOL production;
 
 - (void)requestProductsWithCompletion:(IAPProductsResponseBlock)completion;
 - (id)initWithProductIdentifiers:(NSSet *)productIdentifiers;
