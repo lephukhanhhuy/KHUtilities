@@ -18,6 +18,11 @@
 		201FFE8F17DC72AF002AF1EB /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 201FFE8E17DC72AF002AF1EB /* Default-568h@2x.png */; };
 		201FFE9217DC72AF002AF1EB /* KHViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 201FFE9117DC72AF002AF1EB /* KHViewController.m */; };
 		201FFE9517DC72AF002AF1EB /* KHViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 201FFE9317DC72AF002AF1EB /* KHViewController.xib */; };
+		201FFEA617DC7415002AF1EB /* KHUtilities.m in Sources */ = {isa = PBXBuildFile; fileRef = 201FFEA517DC7415002AF1EB /* KHUtilities.m */; };
+		201FFEAF17DC75FC002AF1EB /* IAPHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 201FFEAA17DC75FC002AF1EB /* IAPHelper.m */; };
+		201FFEB117DC75FC002AF1EB /* NSString+Base64.m in Sources */ = {isa = PBXBuildFile; fileRef = 201FFEAE17DC75FC002AF1EB /* NSString+Base64.m */; };
+		201FFEB317DC760B002AF1EB /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 201FFEB217DC760B002AF1EB /* StoreKit.framework */; };
+		201FFEB617DC76FA002AF1EB /* KHIAPShare.m in Sources */ = {isa = PBXBuildFile; fileRef = 201FFEB517DC76FA002AF1EB /* KHIAPShare.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -37,6 +42,15 @@
 		201FFE9017DC72AF002AF1EB /* KHViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KHViewController.h; sourceTree = "<group>"; };
 		201FFE9117DC72AF002AF1EB /* KHViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = KHViewController.m; sourceTree = "<group>"; };
 		201FFE9417DC72AF002AF1EB /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/KHViewController.xib; sourceTree = "<group>"; };
+		201FFEA417DC7415002AF1EB /* KHUtilities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KHUtilities.h; sourceTree = "<group>"; };
+		201FFEA517DC7415002AF1EB /* KHUtilities.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KHUtilities.m; sourceTree = "<group>"; };
+		201FFEA917DC75FC002AF1EB /* IAPHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IAPHelper.h; sourceTree = "<group>"; };
+		201FFEAA17DC75FC002AF1EB /* IAPHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IAPHelper.m; sourceTree = "<group>"; };
+		201FFEAD17DC75FC002AF1EB /* NSString+Base64.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+Base64.h"; sourceTree = "<group>"; };
+		201FFEAE17DC75FC002AF1EB /* NSString+Base64.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+Base64.m"; sourceTree = "<group>"; };
+		201FFEB217DC760B002AF1EB /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		201FFEB417DC76FA002AF1EB /* KHIAPShare.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = KHIAPShare.h; sourceTree = "<group>"; };
+		201FFEB517DC76FA002AF1EB /* KHIAPShare.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = KHIAPShare.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				201FFEB317DC760B002AF1EB /* StoreKit.framework in Frameworks */,
 				201FFE7917DC72AF002AF1EB /* UIKit.framework in Frameworks */,
 				201FFE7B17DC72AF002AF1EB /* Foundation.framework in Frameworks */,
 				201FFE7D17DC72AF002AF1EB /* CoreGraphics.framework in Frameworks */,
@@ -56,6 +71,7 @@
 		201FFE6C17DC72AF002AF1EB = {
 			isa = PBXGroup;
 			children = (
+				201FFEB217DC760B002AF1EB /* StoreKit.framework */,
 				201FFE7E17DC72AF002AF1EB /* KHUtilities */,
 				201FFE7717DC72AF002AF1EB /* Frameworks */,
 				201FFE7617DC72AF002AF1EB /* Products */,
@@ -83,6 +99,9 @@
 		201FFE7E17DC72AF002AF1EB /* KHUtilities */ = {
 			isa = PBXGroup;
 			children = (
+				201FFEA717DC7561002AF1EB /* KHAdditions */,
+				201FFEA817DC7561002AF1EB /* KHIAPHelper */,
+				201FFEA317DC7415002AF1EB /* KHUtilities */,
 				201FFE8717DC72AF002AF1EB /* KHAppDelegate.h */,
 				201FFE8817DC72AF002AF1EB /* KHAppDelegate.m */,
 				201FFE9017DC72AF002AF1EB /* KHViewController.h */,
@@ -105,6 +124,35 @@
 				201FFE8E17DC72AF002AF1EB /* Default-568h@2x.png */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		201FFEA317DC7415002AF1EB /* KHUtilities */ = {
+			isa = PBXGroup;
+			children = (
+				201FFEA417DC7415002AF1EB /* KHUtilities.h */,
+				201FFEA517DC7415002AF1EB /* KHUtilities.m */,
+			);
+			path = KHUtilities;
+			sourceTree = "<group>";
+		};
+		201FFEA717DC7561002AF1EB /* KHAdditions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = KHAdditions;
+			sourceTree = "<group>";
+		};
+		201FFEA817DC7561002AF1EB /* KHIAPHelper */ = {
+			isa = PBXGroup;
+			children = (
+				201FFEA917DC75FC002AF1EB /* IAPHelper.h */,
+				201FFEAA17DC75FC002AF1EB /* IAPHelper.m */,
+				201FFEB417DC76FA002AF1EB /* KHIAPShare.h */,
+				201FFEB517DC76FA002AF1EB /* KHIAPShare.m */,
+				201FFEAD17DC75FC002AF1EB /* NSString+Base64.h */,
+				201FFEAE17DC75FC002AF1EB /* NSString+Base64.m */,
+			);
+			path = KHIAPHelper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -135,7 +183,7 @@
 			attributes = {
 				CLASSPREFIX = KH;
 				LastUpgradeCheck = 0460;
-				ORGANIZATIONNAME = "Khanh Huy";
+				ORGANIZATIONNAME = "Indygo Media";
 			};
 			buildConfigurationList = 201FFE7017DC72AF002AF1EB /* Build configuration list for PBXProject "KHUtilities" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -177,6 +225,10 @@
 				201FFE8517DC72AF002AF1EB /* main.m in Sources */,
 				201FFE8917DC72AF002AF1EB /* KHAppDelegate.m in Sources */,
 				201FFE9217DC72AF002AF1EB /* KHViewController.m in Sources */,
+				201FFEA617DC7415002AF1EB /* KHUtilities.m in Sources */,
+				201FFEAF17DC75FC002AF1EB /* IAPHelper.m in Sources */,
+				201FFEB117DC75FC002AF1EB /* NSString+Base64.m in Sources */,
+				201FFEB617DC76FA002AF1EB /* KHIAPShare.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -227,7 +279,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 			};
@@ -251,7 +303,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 6.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
