@@ -7,7 +7,10 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GADBannerView.h"
 
 @interface KHViewController : UIViewController
-
+{
+    GADBannerView *bannerView_;
+}
 @end

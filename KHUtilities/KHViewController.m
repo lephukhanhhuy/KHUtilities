@@ -9,6 +9,7 @@
 #import "KHViewController.h"
 #import "KHIAPShare.h"
 #import "NSString+Base64.h"
+#import "KHSecondViewController.h"
 
 @interface KHViewController ()
 @property (retain) SKProduct* product;
@@ -19,37 +20,28 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	// Do any additional setup after loading the view, typically from a nib.
+	
     
+    // Test request iap and buy iap
     [[KHIAPShare sharedHelper].iap requestProductsWithCompletion:^(SKProductsRequest* request,SKProductsResponse* response)
      {
          NSLog(@"%d - %@",[KHIAPShare sharedHelper].iap.products.count,[KHIAPShare sharedHelper].iap.products);
          self.product = [[KHIAPShare sharedHelper].iap.products lastObject];
          UIButton* button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
          [button setTitle:@"Buy" forState:UIControlStateNormal];
-         button.frame = CGRectMake(10, 10, 300, 70);
+         button.frame = CGRectMake(10, 300, 300, 70);
          
          [button addTarget:self action:@selector(btnBuy:) forControlEvents:UIControlEventTouchUpInside];
          [self.view addSubview:button];
      }];
+    
+    // Test admod
+    bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeFullBanner];
+    bannerView_.adUnitID = @"a1512cd908c0537";
+    bannerView_.rootViewController = self;
+    [self.view addSubview:bannerView_];
+    [bannerView_ loadRequest:[GADRequest request]];
 }
-- (void) checkReceipt:(NSData*) receipt
-{
-    [[KHIAPShare sharedHelper].iap checkReceipt:receipt onCompletion:^(NSString *response, NSError *error) {
-        NSDictionary* rec = [response toJSON];
-        if([rec[@"status"] integerValue]==0)
-        {
-            [[KHIAPShare sharedHelper].iap provideContent:self.product.productIdentifier];
-            NSLog(@"SUCCESS %@",response);
-            NSLog(@"Pruchases %@",[KHIAPShare sharedHelper].iap.purchasedProducts);
-        }
-        else
-        {
-            NSLog(@"FAIL %@",response);
-        }
-    }];
-}
-
 - (void) btnBuy:(id) sender
 {
     [[KHIAPShare sharedHelper].iap buyProduct:self.product onCompletion:^(SKPaymentTransaction *transaction) {
@@ -58,11 +50,30 @@
         }
         else if (transaction.transactionState == SKPaymentTransactionStatePurchased)
         {
-            [self checkReceipt:transaction.transactionReceipt];
+            [[KHIAPShare sharedHelper].iap checkReceipt:transaction.transactionReceipt onCompletion:^(NSString *response, NSError *error) {
+                NSDictionary* rec = [response toJSON];
+                if([rec[@"status"] integerValue]==0)
+                {
+                    [[KHIAPShare sharedHelper].iap provideContent:self.product.productIdentifier];
+                    NSLog(@"SUCCESS %@",response);
+                }
+                else
+                {
+                    NSLog(@"FAIL %@",response);
+                }
+            }];
         }
         else if(transaction.transactionState == SKPaymentTransactionStateFailed) {
             NSLog(@"Fail");
         }
+    }];
+}
+- (IBAction)btnPlay:(id)sender {
+    KHSecondViewController* vc = [[KHSecondViewController alloc] initWithNibName:@"KHSecondViewController" bundle:nil];
+    UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:vc];
+    [self presentViewController:nav animated:YES completion:^{
+        bannerView_.adSize = kGADAdSizeMediumRectangle;
+        [bannerView_ loadRequest:[GADRequest request]];
     }];
 }
 
@@ -72,4 +83,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+- (void)dealloc
+{
+    bannerView_ = nil;
+}
 @end
