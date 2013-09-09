@@ -34,6 +34,7 @@
      }];
     
     [self initAdBannerWithSize:kGADAdSizeMediumRectangle];
+    [self initAdBannerAutoRefreshTimer:5];
 }
 - (void) btnBuy:(id) sender
 {

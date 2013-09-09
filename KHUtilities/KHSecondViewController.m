@@ -23,6 +23,7 @@
     self.navigationItem.rightBarButtonItem = barItem;
     
     [self initAdBannerWithSize:kGADAdSizeBanner];
+    [self initAdBannerAutoRefreshTimer:10];
 }
 - (void) btnDoneSelected:(id) sender
 {

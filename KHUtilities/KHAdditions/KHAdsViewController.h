@@ -13,8 +13,13 @@
 
 @interface KHAdsViewController : UIViewController
 {
-    GADBannerView *bannerView_;
+    GADBannerView*  bannerView_;
+    
+    int             timeRefresh;
+    NSTimer*        timerRefresh;
 }
+
 - (void) initAdBannerWithSize:(GADAdSize) size;
+- (void) initAdBannerAutoRefreshTimer:(int) refreshTime;
 
 @end
