@@ -7,7 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "GADBannerView.h"
+
+#define kAdmodId @"a1512cd908c0537"
 
 @interface KHAdsViewController : UIViewController
+{
+    GADBannerView *bannerView_;
+}
+- (void) initAdBannerWithSize:(GADAdSize) size;
 
 @end

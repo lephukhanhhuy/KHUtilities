@@ -8,22 +8,22 @@
 
 #import "KHAdsViewController.h"
 
-@interface KHAdsViewController ()
-
-@end
-
 @implementation KHAdsViewController
 
-- (void)viewDidLoad
+- (void) initAdBannerWithSize:(GADAdSize) size
 {
-    [super viewDidLoad];
-	// Do any additional setup after loading the view.
+    bannerView_ = [[GADBannerView alloc] initWithAdSize:size];
+    bannerView_.adUnitID = kAdmodId;
+    bannerView_.rootViewController = self;
+    [self.view addSubview:bannerView_];
+    
+    // Load first request
+    [bannerView_ loadRequest:[GADRequest request]];
 }
 
-- (void)didReceiveMemoryWarning
+- (void)dealloc
 {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
+    bannerView_ = nil;
 }
 
 @end

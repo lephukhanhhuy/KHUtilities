@@ -20,8 +20,6 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-	
-    
     // Test request iap and buy iap
     [[KHIAPShare sharedHelper].iap requestProductsWithCompletion:^(SKProductsRequest* request,SKProductsResponse* response)
      {
@@ -35,12 +33,7 @@
          [self.view addSubview:button];
      }];
     
-    // Test admod
-    bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeFullBanner];
-    bannerView_.adUnitID = @"a1512cd908c0537";
-    bannerView_.rootViewController = self;
-    [self.view addSubview:bannerView_];
-    [bannerView_ loadRequest:[GADRequest request]];
+    [self initAdBannerWithSize:kGADAdSizeMediumRectangle];
 }
 - (void) btnBuy:(id) sender
 {
@@ -72,19 +65,8 @@
     KHSecondViewController* vc = [[KHSecondViewController alloc] initWithNibName:@"KHSecondViewController" bundle:nil];
     UINavigationController* nav = [[UINavigationController alloc] initWithRootViewController:vc];
     [self presentViewController:nav animated:YES completion:^{
-        bannerView_.adSize = kGADAdSizeMediumRectangle;
-        [bannerView_ loadRequest:[GADRequest request]];
+        
     }];
 }
 
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
-}
-
-- (void)dealloc
-{
-    bannerView_ = nil;
-}
 @end

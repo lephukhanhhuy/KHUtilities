@@ -22,21 +22,11 @@
     UIBarButtonItem* barItem = [[UIBarButtonItem alloc] initWithTitle:@"Done" style:UIBarButtonItemStyleDone target:self action:@selector(btnDoneSelected:)];
     self.navigationItem.rightBarButtonItem = barItem;
     
-    // Test admod
-    bannerView_ = [[GADBannerView alloc] initWithAdSize:kGADAdSizeFullBanner];
-    bannerView_.adUnitID = @"a1512cd908c0537";
-    bannerView_.rootViewController = self;
-    [self.view addSubview:bannerView_];
-    [bannerView_ loadRequest:[GADRequest request]];
+    [self initAdBannerWithSize:kGADAdSizeBanner];
 }
 - (void) btnDoneSelected:(id) sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
-}
-- (void)didReceiveMemoryWarning
-{
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 @end
